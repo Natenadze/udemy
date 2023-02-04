@@ -67,18 +67,18 @@ extension LoginViewController {
         
         // - mainTitleLabel -
         mainTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        mainTitleLabel.font = .preferredFont(forTextStyle: .headline)
+        mainTitleLabel.font = .preferredFont(forTextStyle: .largeTitle)
         mainTitleLabel.textAlignment = .center
+        mainTitleLabel.adjustsFontForContentSizeCategory = true   // adjust font for diff screen sizes
         mainTitleLabel.text = "Bankey"
-        mainTitleLabel.font = UIFont.systemFont(ofSize: 32)
         
         // - subTitleLabel -
         subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subTitleLabel.font = .preferredFont(forTextStyle: .subheadline)
+        subTitleLabel.font = .preferredFont(forTextStyle: .title3)
         subTitleLabel.numberOfLines = 0
         subTitleLabel.textAlignment = .center
+        subTitleLabel.adjustsFontForContentSizeCategory = true   // adjust font for diff screen sizes
         subTitleLabel.text = "Your premium source for all things banking!"
-        subTitleLabel.font = UIFont.systemFont(ofSize: 22)
         
         // - signInButton -
         signInButton.translatesAutoresizingMaskIntoConstraints = false
@@ -106,16 +106,13 @@ extension LoginViewController {
         NSLayoutConstraint.activate([
             
             // - mainTitleLabel -
-            mainTitleLabel.bottomAnchor.constraint(equalTo: subTitleLabel.topAnchor, constant: -5),
-            mainTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mainTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mainTitleLabel.heightAnchor.constraint(equalToConstant: 40),
+            mainTitleLabel.bottomAnchor.constraint(equalTo: subTitleLabel.topAnchor, constant: -6),
+            mainTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             // - subtitleLabel -
-            subTitleLabel.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: -20),
+            subTitleLabel.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: -50),
             subTitleLabel.leadingAnchor.constraint(equalTo: loginView.leadingAnchor),
             subTitleLabel.trailingAnchor.constraint(equalTo: loginView.trailingAnchor),
-            subTitleLabel.heightAnchor.constraint(equalToConstant: 75),
             
             // - loginView -
             loginView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
