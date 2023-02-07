@@ -7,16 +7,25 @@
 
 import UIKit
 
+protocol OnboardingContainerVCDelegate: AnyObject {
+    func didFinishOnboarding()
+}
 
 class OnboardingContainerVC: UIViewController {
     
     let pageVC: UIPageViewController
     var pages = [UIViewController]()
-    var currentVC: UIViewController {
-        didSet {
-            
-        }
-    }
+    var currentVC: UIViewController
+    let closeButton = UIButton(type: .system)
+    
+    weak var delegate: OnboardingContainerVCDelegate?
+    
+    override func viewDidLoad() {
+          super.viewDidLoad()
+        setup()
+        style()
+        layout()
+      }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
          self.pageVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -38,26 +47,43 @@ class OnboardingContainerVC: UIViewController {
          fatalError("init(coder:) has not been implemented")
      }
     
-    override func viewDidLoad() {
-          super.viewDidLoad()
-          
-          view.backgroundColor = .systemBlue
-          addChild(pageVC)
-          view.addSubview(pageVC.view)
-        pageVC.didMove(toParent: self)
-        pageVC.dataSource = self
-        pageVC.view.translatesAutoresizingMaskIntoConstraints = false
-          
-          NSLayoutConstraint.activate([
-              view.topAnchor.constraint(equalTo: pageVC.view.topAnchor),
-              view.leadingAnchor.constraint(equalTo: pageVC.view.leadingAnchor),
-              view.trailingAnchor.constraint(equalTo: pageVC.view.trailingAnchor),
-              view.bottomAnchor.constraint(equalTo: pageVC.view.bottomAnchor),
-          ])
-          
-        pageVC.setViewControllers([pages.first!], direction: .forward, animated: false, completion: nil)
-          currentVC = pages.first!
-      }
+    
+    private func setup() {
+        
+        view.backgroundColor = .systemBlue
+        addChild(pageVC)
+        view.addSubview(pageVC.view)
+      pageVC.didMove(toParent: self)
+      pageVC.dataSource = self
+      pageVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: pageVC.view.topAnchor),
+            view.leadingAnchor.constraint(equalTo: pageVC.view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: pageVC.view.trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: pageVC.view.bottomAnchor),
+        ])
+        
+      pageVC.setViewControllers([pages.first!], direction: .forward, animated: false, completion: nil)
+        currentVC = pages.first!
+    }
+    
+    private func style() {
+        
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.setTitle("Close", for: [])
+        closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
+    }
+    
+    private func layout() {
+        
+        view.addSubview(closeButton)
+        NSLayoutConstraint.activate([
+            closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)
+        ])
+    }
+    
   }
 
   // MARK: - UIPageViewControllerDataSource
@@ -94,3 +120,11 @@ extension OnboardingContainerVC: UIPageViewControllerDataSource {
       }
   }
 
+// MARK: - Actions
+
+extension OnboardingContainerVC {
+    
+    @objc func closeTapped() {
+        delegate?.didFinishOnboarding()
+     }
+}
