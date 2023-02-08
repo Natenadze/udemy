@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         onboardingContainerVC.delegate = self
         loginViewController.delegate = self
 //        window?.rootViewController = loginViewController
-        window?.rootViewController = mainVC
-        //        window?.rootViewController = onboardingContainerVC
+//        window?.rootViewController = mainVC
+                window?.rootViewController = AccountSummaryVC()
         //        window?.rootViewController = OnboardingVC()
         
         mainVC.selectedIndex = 0  // When view appears, we select here which tab bar to show
