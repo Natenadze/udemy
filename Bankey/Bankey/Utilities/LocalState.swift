@@ -20,8 +20,7 @@ public class LocalState {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.hasOnboarded.rawValue)
-            UserDefaults.standard.synchronize()
-            // synchronize, to immediately write any changes made to the UserDefaults to disk. This ensures that the updated value is persisted even if the app is terminated
+           
         }
     }
 }

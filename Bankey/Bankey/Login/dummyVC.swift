@@ -45,7 +45,6 @@ extension DummyVC {
         stackView.addArrangedSubview(logoutButton)
         view.addSubview(stackView)
         
-        
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)

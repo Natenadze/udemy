@@ -7,6 +7,8 @@
 
 import UIKit
 
+let appColor: UIColor = .systemTeal
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -15,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var loginViewController = LoginViewController()
     var onboardingContainerVC = OnboardingContainerVC()
     let dummyVC = DummyVC()
+    let mainVC = MainViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -25,10 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dummyVC.logoutDelegate = self
         onboardingContainerVC.delegate = self
         loginViewController.delegate = self
-        window?.rootViewController = loginViewController
+//        window?.rootViewController = loginViewController
+        window?.rootViewController = mainVC
         //        window?.rootViewController = onboardingContainerVC
         //        window?.rootViewController = OnboardingVC()
         
+        mainVC.selectedIndex = 0  // When view appears, we select here which tab bar to show
         return true
     }
     
@@ -71,7 +76,7 @@ extension AppDelegate {
         window.rootViewController = vc
         window.makeKeyAndVisible()
         UIView.transition(with: window,
-                          duration: 0.7,
+                          duration: 0.4,
                           options: .transitionCrossDissolve,
                           animations: nil,
                           completion: nil)
