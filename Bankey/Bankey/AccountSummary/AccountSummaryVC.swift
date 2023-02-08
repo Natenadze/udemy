@@ -20,7 +20,7 @@ class AccountSummaryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-    } 
+    }
 }
 
 extension AccountSummaryVC {
@@ -65,7 +65,6 @@ extension AccountSummaryVC: UITableViewDataSource {
         cell.textLabel?.text = games[indexPath.row]
         return cell
     }
-    
     
 }
 
