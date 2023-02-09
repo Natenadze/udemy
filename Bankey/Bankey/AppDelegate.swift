@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var loginViewController = LoginViewController()
     var onboardingContainerVC = OnboardingContainerVC()
-    let dummyVC = DummyVC()
     let mainVC = MainViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -25,15 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
         
-        dummyVC.logoutDelegate = self
         onboardingContainerVC.delegate = self
         loginViewController.delegate = self
-//        window?.rootViewController = loginViewController
-//        window?.rootViewController = mainVC
-                window?.rootViewController = AccountSummaryVC()
-        //        window?.rootViewController = OnboardingVC()
+
+        let vc = mainVC
+        vc.setStatusBar()
         
-        mainVC.selectedIndex = 0  // When view appears, we select here which tab bar to show
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().backgroundColor = appColor
+        window?.rootViewController = vc
+        
         return true
     }
     
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: LoginViewControllerDelegate {
     func didLogin() {
         if LocalState.hasOnboarded {
-            setRootVC(dummyVC)
+            setRootVC(mainVC)
         }else {
             setRootVC(onboardingContainerVC)
         }
@@ -53,7 +53,7 @@ extension AppDelegate: LoginViewControllerDelegate {
 extension AppDelegate: OnboardingContainerVCDelegate {
     func didFinishOnboarding() {
         LocalState.hasOnboarded = true
-        setRootVC(dummyVC)
+        setRootVC(mainVC)
     }
 }
 
