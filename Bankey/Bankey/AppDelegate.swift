@@ -14,9 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    var loginViewController = LoginViewController()
-    var onboardingContainerVC = OnboardingContainerVC()
+    let loginViewController = LoginViewController()
+    let onboardingContainerVC = OnboardingContainerVC()
     let mainVC = MainViewController()
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -26,15 +27,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         onboardingContainerVC.delegate = self
         loginViewController.delegate = self
-
-        let vc = mainVC
-        vc.setStatusBar()
         
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().backgroundColor = appColor
-        window?.rootViewController = vc
+        displayLogin()
         
         return true
+    }
+    
+    private func displayLogin() {
+        setRootVC(loginViewController)
+    }
+    
+    private func displayNextScreen() {
+        if LocalState.hasOnboarded {
+            prepMainView()
+            setRootVC(mainVC)
+        } else {
+            setRootVC(onboardingContainerVC)
+        }
+    }
+    
+    private func prepMainView() {
+        mainVC.setStatusBar()
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().backgroundColor = appColor
     }
     
 }
@@ -42,17 +57,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: LoginViewControllerDelegate {
     func didLogin() {
-        if LocalState.hasOnboarded {
-            setRootVC(mainVC)
-        }else {
-            setRootVC(onboardingContainerVC)
-        }
+      displayNextScreen()
     }
 }
 
 extension AppDelegate: OnboardingContainerVCDelegate {
     func didFinishOnboarding() {
         LocalState.hasOnboarded = true
+        prepMainView()
         setRootVC(mainVC)
     }
 }
