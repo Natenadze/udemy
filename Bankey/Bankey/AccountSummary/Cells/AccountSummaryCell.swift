@@ -58,13 +58,14 @@ extension AccountSummaryCell {
         typeLabel.adjustsFontForContentSizeCategory = true
         typeLabel.text = "Account type"
         
-        // divider View
+        // underlineView 
         underlineView.translatesAutoresizingMaskIntoConstraints = false
         underlineView.backgroundColor = appColor
         
         // nameLabel
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        nameLabel.adjustsFontSizeToFitWidth = true   // Minimum font size to show full text
         nameLabel.text = "Account name"
         
         // balanceStackView
