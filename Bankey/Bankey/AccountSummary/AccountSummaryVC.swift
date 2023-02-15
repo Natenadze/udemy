@@ -29,11 +29,6 @@ class AccountSummaryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        setupNavigationBar()
-    }
-    
-    func setupNavigationBar() {
-        navigationItem.rightBarButtonItem = logoutBarButtonItem
     }
 }
 
@@ -41,7 +36,8 @@ extension AccountSummaryVC {
     private func setup() {
         setupTableView()
         setupTableHeaderView()
-        fetchDataAndLoadViews()
+        fetchData()
+        setupNavigationBar()
     }
     
     private func setupTableView() {
@@ -70,6 +66,10 @@ extension AccountSummaryVC {
         size.width = UIScreen.main.bounds.width
         headerView.frame.size = size
         tableView.tableHeaderView = headerView
+    }
+    
+    func setupNavigationBar() {
+        navigationItem.rightBarButtonItem = logoutBarButtonItem
     }
 }
 
@@ -109,22 +109,25 @@ extension AccountSummaryVC {
 
 // MARK: - Networking
 extension AccountSummaryVC {
-    private func fetchDataAndLoadViews() {
+
+    private func fetchData() {
+        let group = DispatchGroup()
         
+        group.enter()
         fetchProfile(forUserId: "1") { result in
             switch result {
             case .success(let profile):
                 self.profile = profile
                 self.configureTableHeaderView(with: profile)
-                //                DispatchQueue.main.async {
                 self.tableView.reloadData()
-                //                }
                 
             case .failure(let error):
                 print(error.localizedDescription)
             }
+            group.leave()
         }
         
+        group.enter()
         fetchAccounts(forUserId: "1") { result in
             switch result {
             case .success(let accounts):
@@ -134,9 +137,11 @@ extension AccountSummaryVC {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+            group.leave()
         }
-        
-        
+        group.notify(queue: .main) {
+            self.tableView.reloadData()
+        }
     }
     
     private func configureTableHeaderView(with profile: Profile) {
@@ -145,7 +150,6 @@ extension AccountSummaryVC {
                                                     date: Date())
         
         self.headerView.configure(viewModel: vm)
-        
         
     }
     
