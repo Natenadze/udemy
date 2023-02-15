@@ -135,13 +135,14 @@ extension AccountSummaryVC {
         group.enter()
         fetchProfile(forUserId: "1") { result in
             switch result {
+                
             case .success(let profile):
                 self.profile = profile
-//                self.configureTableHeaderView(with: profile)
+                //  self.configureTableHeaderView(with: profile)
                 self.tableView.reloadData()
                 
             case .failure(let error):
-                print(error.localizedDescription)
+                self.displayError(error)
             }
             group.leave()
         }
@@ -149,12 +150,13 @@ extension AccountSummaryVC {
         group.enter()
         fetchAccounts(forUserId: "1") { result in
             switch result {
+                
             case .success(let accounts):
                 self.accounts = accounts
-//                self.configureTableCells(with: accounts)
+                //                self.configureTableCells(with: accounts)
                 self.tableView.reloadData()
             case .failure(let error):
-                print(error.localizedDescription)
+                self.displayError(error)
             }
             group.leave()
         }
@@ -164,10 +166,25 @@ extension AccountSummaryVC {
             guard let profile = self.profile else { return }
             
             self.isLoaded = true
-            self.configureTableHeaderView(with: profile) //
-            self.configureTableCells(with: self.accounts) //
+            self.configureTableHeaderView(with: profile)
+            self.configureTableCells(with: self.accounts)
             self.tableView.reloadData()
         }
+    }
+    
+    private func displayError(_ error: NetworkError) {
+        let title: String
+        let message: String
+        switch error {
+            
+        case .serverError:
+            title = "Server Error"
+            message = "We could not process your request. Please try again."
+        case .decodingError:
+            title = "Network Error"
+            message = "Ensure you are connected to the internet. Please try again."
+        }
+        self.showErrorAlert(title: title, message: message)
     }
     
     private func configureTableHeaderView(with profile: Profile) {
@@ -185,6 +202,16 @@ extension AccountSummaryVC {
                                          accountName: $0.name,
                                          balance: $0.amount)
         }
+    }
+    
+    private func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 
