@@ -34,6 +34,8 @@
 		5DA80551299A7B2300D98ADC /* AccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA80550299A7B2300D98ADC /* AccountTests.swift */; };
 		5DA80553299D506400D98ADC /* SkeletonLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA80552299D506400D98ADC /* SkeletonLoadable.swift */; };
 		5DA80555299D512100D98ADC /* SkeletopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA80554299D512100D98ADC /* SkeletopCell.swift */; };
+		5DA80558299D66D900D98ADC /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA80557299D66D900D98ADC /* ProfileManager.swift */; };
+		5DA8055A299D68D000D98ADC /* AccountSummaryVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA80559299D68D000D98ADC /* AccountSummaryVCTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		5DA80550299A7B2300D98ADC /* AccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTests.swift; sourceTree = "<group>"; };
 		5DA80552299D506400D98ADC /* SkeletonLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonLoadable.swift; sourceTree = "<group>"; };
 		5DA80554299D512100D98ADC /* SkeletopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletopCell.swift; sourceTree = "<group>"; };
+		5DA80557299D66D900D98ADC /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		5DA80559299D68D000D98ADC /* AccountSummaryVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryVCTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,7 @@
 				5DA8054A299A6C2E00D98ADC /* AccountSummaryVC + Networking.swift */,
 				5DA8052929941EC900D98ADC /* Header */,
 				5DA8052A29941F4300D98ADC /* Cells */,
+				5DA80556299D66B400D98ADC /* Networking */,
 			);
 			path = AccountSummary;
 			sourceTree = "<group>";
@@ -233,8 +238,17 @@
 			children = (
 				5DA8054E299A785100D98ADC /* ProfileTests.swift */,
 				5DA80550299A7B2300D98ADC /* AccountTests.swift */,
+				5DA80559299D68D000D98ADC /* AccountSummaryVCTests.swift */,
 			);
 			path = AccountSummary;
+			sourceTree = "<group>";
+		};
+		5DA80556299D66B400D98ADC /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				5DA80557299D66D900D98ADC /* ProfileManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,6 +356,7 @@
 				5D23C089298D2D37008C91A7 /* LoginView.swift in Sources */,
 				5DA8051D2992F37E00D98ADC /* LocalState.swift in Sources */,
 				5DA80516298EC0A300D98ADC /* OnboardingContainerVC.swift in Sources */,
+				5DA80558299D66D900D98ADC /* ProfileManager.swift in Sources */,
 				5DA805262993FAD500D98ADC /* AccountSummaryHeaderView.swift in Sources */,
 				5DA80518298FF17C00D98ADC /* OnboardingVC.swift in Sources */,
 				5DA8053029953DA200D98ADC /* CurrencyFormatter.swift in Sources */,
@@ -368,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DA8053F29964D2500D98ADC /* CurrencyFormatterTests.swift in Sources */,
+				5DA8055A299D68D000D98ADC /* AccountSummaryVCTests.swift in Sources */,
 				5DA80551299A7B2300D98ADC /* AccountTests.swift in Sources */,
 				5DA8054F299A785100D98ADC /* ProfileTests.swift in Sources */,
 			);
