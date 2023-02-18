@@ -11,6 +11,8 @@
 		5DA8056C299F845B00D98ADC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA8056B299F845B00D98ADC /* ViewController.swift */; };
 		5DA80571299F845D00D98ADC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA80570299F845D00D98ADC /* Assets.xcassets */; };
 		5DA80574299F845D00D98ADC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DA80572299F845D00D98ADC /* LaunchScreen.storyboard */; };
+		5DA8057D299F990200D98ADC /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA8057C299F990200D98ADC /* PasswordTextField.swift */; };
+		5DA80580299FA77400D98ADC /* UITextField + secureToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA8057F299FA77400D98ADC /* UITextField + secureToggle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		5DA80570299F845D00D98ADC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DA80573299F845D00D98ADC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DA80575299F845D00D98ADC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5DA8057C299F990200D98ADC /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		5DA8057F299FA77400D98ADC /* UITextField + secureToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + secureToggle.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 				5DA8057B299F850900D98ADC /* Files */,
 				5DA80567299F845B00D98ADC /* AppDelegate.swift */,
 				5DA8056B299F845B00D98ADC /* ViewController.swift */,
+				5DA8057C299F990200D98ADC /* PasswordTextField.swift */,
+				5DA8057E299FA75900D98ADC /* Utils */,
 			);
 			path = Password;
 			sourceTree = "<group>";
@@ -67,6 +73,14 @@
 				5DA80575299F845D00D98ADC /* Info.plist */,
 			);
 			name = Files;
+			sourceTree = "<group>";
+		};
+		5DA8057E299FA75900D98ADC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5DA8057F299FA77400D98ADC /* UITextField + secureToggle.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +153,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DA80580299FA77400D98ADC /* UITextField + secureToggle.swift in Sources */,
 				5DA8056C299F845B00D98ADC /* ViewController.swift in Sources */,
+				5DA8057D299F990200D98ADC /* PasswordTextField.swift in Sources */,
 				5DA80568299F845B00D98ADC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
