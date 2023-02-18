@@ -12,12 +12,10 @@ class ViewController: UIViewController {
     let stackView = UIStackView()
     
     let passwordTextField = PasswordTextField(placeHolderText: "New password")
-    let criteriaView = PasswordCriteriaView(text: "8-32 characters (no spaces)")
-    let labelView = LabelView()
-    let sampleView2 = PasswordCriteriaView(text: "uppercase letter (A-Z)")
-    let sampleView3 = PasswordCriteriaView(text: "lowercase (a-z)")
-    let sampleView4 = PasswordCriteriaView(text: "digit (0-9)")
-    let sampleView5 = PasswordCriteriaView(text: "special character (e.g. !@#$%^)")
+    let statusView = PasswordStatusView()
+    let confirmPasswordTextField = PasswordTextField(placeHolderText: "Re-enter new password")
+    let resetButton = UIButton(type: .system)
+
 
     
     override func viewDidLoad() {
@@ -37,21 +35,33 @@ extension ViewController {
     func style() {
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         
+        // stackView
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 20
+//        stackView.distribution = .equalSpacing
 
+        // statusView
+        statusView.layer.cornerRadius = 6
+        stackView.clipsToBounds = true
+        
+        // confirmPasswordTextField
+        confirmPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        // reset Button
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.configuration = .filled()
+        resetButton.setTitle("Reset password", for: [])
+        // resetButton.addTarget(self, action: #selector(resetPasswordButtonTapped), for: .primaryActionTriggered)
     }
     
     func layout() {
         view.addSubview(stackView)
         stackView.addArrangedSubview(passwordTextField)
-        stackView.addArrangedSubview(criteriaView)
-        stackView.addArrangedSubview(labelView)
-        stackView.addArrangedSubview(sampleView2)
-        stackView.addArrangedSubview(sampleView3)
-        stackView.addArrangedSubview(sampleView4)
-        stackView.addArrangedSubview(sampleView5)
+        stackView.addArrangedSubview(statusView)
+        stackView.addArrangedSubview(confirmPasswordTextField)
+        stackView.addArrangedSubview(resetButton)
+   
         
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),

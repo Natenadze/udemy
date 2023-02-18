@@ -12,7 +12,6 @@ class PasswordCriteriaView: UIView {
     let imageView = UIImageView()
     let label = UILabel()
     
-//    let labelText: String
     
     let checkmarkImage = UIImage(systemName: "checkmark.circle")!.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
     let xmarkImage = UIImage(systemName: "xmark.circle")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
@@ -61,7 +60,7 @@ extension PasswordCriteriaView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .secondaryLabel
-//        label.text = labelText
+
         
     }
     
