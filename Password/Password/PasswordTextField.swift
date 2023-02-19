@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PasswordTextFieldDelegate: AnyObject {
+    func editingChanged(_ sender: PasswordTextField)
+}
+
 class PasswordTextField: UIView {
     
     let lockImageView = UIImageView(image: UIImage(systemName: "lock.fill"))
@@ -17,6 +21,7 @@ class PasswordTextField: UIView {
     
     let placeHolderText: String
     
+    weak var delegate: PasswordTextFieldDelegate?
     
     
     init(placeHolderText: String) {
@@ -50,8 +55,9 @@ extension PasswordTextField {
         
         // textField
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.isSecureTextEntry = false
+        textField.isSecureTextEntry = false  // true
         textField.placeholder = placeHolderText
+        textField.autocorrectionType = .no
         textField.delegate = self
         // preventing emojis to be used
         textField.keyboardType = .asciiCapable
@@ -78,7 +84,7 @@ extension PasswordTextField {
 
         errorLabel.numberOfLines = 0 // if we want to make it multiline
         errorLabel.lineBreakMode = .byWordWrapping  // doesn't split the word
-        errorLabel.isHidden = false
+        errorLabel.isHidden = true
 
         
     }
@@ -140,4 +146,7 @@ extension PasswordTextField {
 
 extension PasswordTextField: UITextFieldDelegate {
     
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        delegate?.editingChanged(self)
+    }
 }
