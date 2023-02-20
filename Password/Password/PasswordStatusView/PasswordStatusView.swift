@@ -19,7 +19,7 @@ class PasswordStatusView: UIView {
     let specialCharacterCriteriaView = PasswordCriteriaView(text: "special character (e.g. !@#$%^)")
     
     // Used to determine if we reset criteria back to empty state (⚪️).
-    private var shouldResetCriteria: Bool = true
+    var shouldResetCriteria: Bool = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,7 +35,6 @@ class PasswordStatusView: UIView {
     override var intrinsicContentSize: CGSize {
         CGSize(width: 200, height: 200)
     }
-    
     
 }
 
@@ -93,6 +92,15 @@ extension PasswordStatusView {
 
 // MARK: Actions
 extension PasswordStatusView {
+    
+    func reset() {
+        lengthCriteriaView.reset()
+        uppercaseCriteriaView.reset()
+        lowerCaseCriteriaView.reset()
+        digitCriteriaView.reset()
+        specialCharacterCriteriaView.reset()
+    }
+    
     func updateDisplay(_ text: String) {
         let lengthAndNoSpaceMet = PasswordCriteria.lengthAndNoSpaceMet(text)
         let uppercaseMet = PasswordCriteria.uppercaseMet(text)
@@ -121,8 +129,31 @@ extension PasswordStatusView {
             specialCharMet
             ? specialCharacterCriteriaView.isCriteriaMet = true
             : specialCharacterCriteriaView.reset()
-            
-            
+        } else {
+            // Focus lost (✅ or ❌)
+            lengthCriteriaView.isCriteriaMet = lengthAndNoSpaceMet
+            uppercaseCriteriaView.isCriteriaMet = uppercaseMet
+            lowerCaseCriteriaView.isCriteriaMet = lowercaseMet
+            digitCriteriaView.isCriteriaMet = digitMet
+            specialCharacterCriteriaView.isCriteriaMet = specialCharMet
         }
+    }
+    
+    func validate(_ text: String) -> Bool {
+        let uppercaseMet = PasswordCriteria.uppercaseMet(text)
+        let lowercaseMet = PasswordCriteria.lowercaseMet(text)
+        let digitMet = PasswordCriteria.digitMet(text)
+        let specialCharacterMet = PasswordCriteria.specialCharMet(text)
+        
+        let checkable = [uppercaseMet, lowercaseMet, digitMet, specialCharacterMet]
+        let metCriteria = checkable.filter { $0 } // == true
+        let lengthAndNoSpaceMet = PasswordCriteria.lengthAndNoSpaceMet(text)
+        
+        if lengthAndNoSpaceMet && metCriteria.count >= 3 {
+            return true
+        }
+        
+        return false
+        
     }
 }

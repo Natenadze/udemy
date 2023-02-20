@@ -37,7 +37,5 @@ struct PasswordCriteria {
         let pattern = #"[^a-zA-Z0-9]+"#   // "[@:?!()$#§%,./\\\\]+" if explicitly defined needed
         return text.range(of: pattern, options: .regularExpression) != nil
     }
-    
-
 
 }
